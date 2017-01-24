@@ -6,6 +6,7 @@ import FormFields from 'grommet/components/FormFields';
 import Footer from 'grommet/components/Footer';
 import Layer from 'grommet/components/Layer';
 import TextInput from 'grommet/components/TextInput';
+import Box from 'grommet/components/Box';
 
 export default class TodoAddTaskForm extends Component {
 	constructor (){
@@ -57,10 +58,14 @@ export default class TodoAddTaskForm extends Component {
 			  </select>
 			</FormField>
 		   </Form>
-		   <Footer pad="medium">
-            <Button primary={true} label="Add" onClick={this._onSubmit}/>
-            <Button label="Cancel" onClick={this.props.onClose}/>
-          </Footer>
+		   <Footer pad="small">
+            <Box>
+            	<Button primary={true} label="Add" onClick={this._onSubmit}/>
+            </Box>
+            <Box pad="medium">
+            	<Button label="Cancel" onClick={this.props.onClose}/>
+            </Box>
+            </Footer>
       	</Layer>
 	  );
 	}
