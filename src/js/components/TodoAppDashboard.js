@@ -68,7 +68,7 @@ export default class TodoAppDashboard extends Component {
           responsive={false}>
           <Box>
             <Status value={task.status} size='small' />
-            <span>{task.item}</span>
+            <span>{task.label}</span>
           </Box>
         </ListItem>
       );
