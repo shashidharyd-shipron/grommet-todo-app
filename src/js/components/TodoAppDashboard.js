@@ -8,7 +8,7 @@ import ListItem from 'grommet/components/ListItem';
 import Meter from 'grommet/components/Meter';
 import Value from 'grommet/components/Value';
 import Status from 'grommet/components/icons/Status';
-
+import CloseIcon from 'grommet/components/icons/base/Close';
 import TodoAddTaskForm from './TodoAddTaskForm';
 
 function getLabel(label, count, colorIndex) {
@@ -47,6 +47,12 @@ export default class TodoAppDashboard extends Component {
     this.setState ({tasks:this.state.tasks, addTask: false});
   }
 
+  _onDeleteTask (taskIndex) {
+    let tasks = this.state.tasks;
+    tasks.splice(taskIndex, 1);
+    this.setState (tasks);
+  }
+
   render () {
 
     let tasksMap = {
@@ -72,7 +78,11 @@ export default class TodoAppDashboard extends Component {
           <Box pad="medium">
             <span>{task.label}</span>
           </Box>
+          <Button onClick={this._onDeleteTask.bind(this, index)}>
+            <CloseIcon />
+          </Button>
         </ListItem>
+
       );
     }, this);
 
