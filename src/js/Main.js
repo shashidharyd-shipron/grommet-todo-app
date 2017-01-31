@@ -16,7 +16,7 @@ export default class Main extends Component {
             pad={{horizontal: 'medium'}}>
             <Title>Sample App</Title>
           </Header>
-          <TodoAppDashboard />
+          {this.props.children}
           <Footer primary={true} appCentered={true} direction="column"
             align="center" pad="small" colorIndex="grey-1">
             <p>

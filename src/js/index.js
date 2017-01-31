@@ -2,30 +2,11 @@ import '../scss/index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { Router, browserHistory } from 'react-router';
 
-import Main from './Main';
-
-const body = (
-  <AppContainer>
-    <Main />
-  </AppContainer>
-);
+import Routes from './routes'
 
 let element = document.getElementById('content');
-ReactDOM.render(body, element);
+ReactDOM.render(<Router history={browserHistory} routes={Routes} />, element);
 
 document.body.classList.remove('loading');
-
-// Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./Main', () => {
-    const NextApp = require('./Main').default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp/>
-      </AppContainer>,
-      element
-    );
-  });
-}
