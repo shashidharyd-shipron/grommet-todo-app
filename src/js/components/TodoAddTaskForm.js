@@ -4,14 +4,16 @@ import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Footer from 'grommet/components/Footer';
-import Layer from 'grommet/components/Layer';
 import TextInput from 'grommet/components/TextInput';
 import Box from 'grommet/components/Box';
+
+import { browserHistory } from 'react-router';
+import { addTask } from '../store';
 
 export default class TodoAddTaskForm extends Component {
 	constructor (){
 		super ();
-
+		this._onCancel=this._onCancel.bind(this);
 		this._onSubmit=this._onSubmit.bind(this);
 		this._onLabelChange=this._onLabelChange.bind(this);
 		this._onStatusChange=this._onStatusChange.bind(this);
@@ -21,14 +23,18 @@ export default class TodoAddTaskForm extends Component {
 		}
 	}
 
+	_onCancel (event) {
+		event.preventDefault();
+		browserHistory.push('/');
+	}
+
 	_onSubmit (e){
 		e.preventDefault();
-		console.log(this.state);
 		if (this.state.label){
-			this.props.onSubmit({
+			addTask({
 				label: this.state.label,
 				status: this.state.status || 'ok'
-			})
+			}).then( () => browserHistory.push('/'));
 
 		}
 	}
@@ -43,7 +49,7 @@ export default class TodoAddTaskForm extends Component {
 
 	render (){
 	 return (
-	 	<Layer align='right' closer={true} onClose={this.props.onClose}>
+	 	<Box pad='medium'>
 	 	  <header><h1>Add Task</h1></header>
 	 	  <Form>
 	 	  	<FormField label="Task" htmlFor="labelId">
@@ -63,15 +69,10 @@ export default class TodoAddTaskForm extends Component {
             	<Button primary={true} label="Add" onClick={this._onSubmit}/>
             </Box>
             <Box pad="medium">
-            	<Button label="Cancel" onClick={this.props.onClose}/>
+            	<Button href='/' label="Cancel" onClick={this._onCancel}/>
             </Box>
             </Footer>
-      	</Layer>
+      	</Box>
 	  );
 	}
-};
-
-TodoAddTaskForm.propTypes = {
-	onClose: PropTypes.func.isRequired,
-	onSubmit: PropTypes.func.isRequired
 };

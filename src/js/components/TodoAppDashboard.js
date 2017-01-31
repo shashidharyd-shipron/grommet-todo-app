@@ -11,6 +11,10 @@ import Status from 'grommet/components/icons/Status';
 import CloseIcon from 'grommet/components/icons/base/Close';
 import TodoAddTaskForm from './TodoAddTaskForm';
 
+import { browserHistory } from 'react-router';
+import { getTasks } from '../store';
+
+
 function getLabel(label, count, colorIndex) {
   return {
     "label": label,
@@ -24,27 +28,20 @@ export default class TodoAppDashboard extends Component {
   constructor () {
     super();
     this._onRequestForAddTask = this._onRequestForAddTask.bind(this);
-    this._addTaskCancel = this._addTaskCancel.bind(this);
-    this._onAddTaskConfirm=this._onAddTaskConfirm.bind(this);
-
     this.state = {
-      tasks: [ ],
-      addTask: false
+      tasks: [ ]
     };
   }
 
-  _onRequestForAddTask  () {
-    this.setState({ addTask: true});
+  componentDidMount () {
+    getTasks().then((tasks)=>this.setState({tasks: tasks}));
+
   }
 
-  _addTaskCancel  () {
-    this.setState({ addTask: false});
-  }
+  _onRequestForAddTask (event) {
+    event.preventDefault();
+    browserHistory.push('/add');
 
-  _onAddTaskConfirm (task) {
-    let tasks = this.state.tasks;
-    tasks.push(task);
-    this.setState ({tasks:this.state.tasks, addTask: false});
   }
 
   _onDeleteTask (taskIndex) {
@@ -102,13 +99,6 @@ export default class TodoAppDashboard extends Component {
       label = 'Total';
     }
 
-    let addTaskLayer;
-    if (this.state.addTask) {
-      addTaskLayer = (
-      <TodoAddTaskForm onClose={this._addTaskCancel} onSubmit={this._onAddTaskConfirm}/>
-      );
-    }
-
     return (
       <Box primary={true} flex={true} direction='row'>
         <Box basis='1/3' align="center">
@@ -125,10 +115,9 @@ export default class TodoAppDashboard extends Component {
             {tasks}
           </List>
           <Footer>
-            <Button label="Add Task" onClick={this._onRequestForAddTask}
+            <Button href='/add' label="Add Task" onClick={this._onRequestForAddTask}
             primary={true}/>
           </Footer>
-          {addTaskLayer}
         </Box>
       </Box>
     );
