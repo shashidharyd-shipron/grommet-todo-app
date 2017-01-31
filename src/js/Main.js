@@ -5,7 +5,6 @@ import Anchor from 'grommet/components/Anchor';
 import Header from 'grommet/components/Header';
 import Footer from 'grommet/components/Footer';
 import Title from 'grommet/components/Title';
-import TodoAppDashboard from './components/TodoAppDashboard';
 
 export default class Main extends Component {
   render () {

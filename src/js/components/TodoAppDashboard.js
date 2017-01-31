@@ -9,7 +9,6 @@ import Meter from 'grommet/components/Meter';
 import Value from 'grommet/components/Value';
 import Status from 'grommet/components/icons/Status';
 import CloseIcon from 'grommet/components/icons/base/Close';
-import TodoAddTaskForm from './TodoAddTaskForm';
 
 import { browserHistory } from 'react-router';
 import { getTasks } from '../store';

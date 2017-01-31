@@ -11,4 +11,4 @@ export default {
 	    {path: '/add', component: TodoAddTaskForm },
 	    {path: '*', component: NotFound}
 	  ]
-}
+};
