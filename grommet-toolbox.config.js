@@ -1,4 +1,4 @@
-import path from 'path';
+  import path from 'path';
 
 export default {
   copyAssets: [
@@ -12,5 +12,6 @@ export default {
   mainJs: 'src/js/index.js',
   mainScss: 'src/scss/index.scss',
   devServerPort: 9000,
-  eslintOverride: path.resolve(__dirname, 'customEslintrc')
+  eslintOverride: path.resolve(__dirname, 'customEslintrc'),
+  devServerProxy: {'/api/task/*': 'http://localhost:8000'}
 };

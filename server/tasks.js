@@ -12,6 +12,16 @@ app.use(compression());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 
+const tasks = [];
+app.get('/api/task/', (req, res) => {
+	res.sendStatus(tasks);
+});
+
+app.post('/api/task/', (req, res) => {
+	tasks.push(req.body);
+	res.send(200);
+});
+
 app.use('/', express.static(path.join(__dirname, '/../dist')));
 app.get('/*', function (req, res) {
   res.sendFile(path.resolve(path.join(__dirname, '/../dist/index.html')));
