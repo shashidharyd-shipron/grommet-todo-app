@@ -14,12 +14,12 @@ app.use(bodyParser.json());
 
 const tasks = [];
 app.get('/api/task/', (req, res) => {
-	res.sendStatus(tasks);
+	res.send(tasks);
 });
 
 app.post('/api/task/', (req, res) => {
 	tasks.push(req.body);
-	res.send(200);
+	res.sendStatus(200);
 });
 
 app.use('/', express.static(path.join(__dirname, '/../dist')));
